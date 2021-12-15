@@ -6,6 +6,8 @@ public class Cell {
 
     int n = -1;
 
+    long dist = Long.MAX_VALUE;
+
     boolean isWall;
 
     List<Cell> adjacents;

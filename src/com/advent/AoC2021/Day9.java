@@ -4,8 +4,8 @@ import com.advent.PuzzleSolver;
 import java.util.*;
 
 public class Day9 extends PuzzleSolver {
-    Cell[][] cells;
-    int L, H;
+
+    Grid g;
 
     public Day9() {
         super("src/inputs/lava.txt");
@@ -20,40 +20,17 @@ public class Day9 extends PuzzleSolver {
             input.add(next);
             next = getNextInput();
         }
-        L = input.get(0).length();
-        H = input.size();
-        cells = new Cell[L][H];
-        initGrid(input);
-        buildAdjacents();
+        g = new Grid(input.get(0).length(), input.size());
+
     }
 
-    private void initGrid(List<String> input) {
-        for (int y = 0; y < H; y++) {
-            String row = input.get(y);
-            for (int x = 0; x < L; x++) {
-                cells[x][y] = new Cell(Character.getNumericValue(row.charAt(x)));
-            }
-        }
-    }
 
-    private void buildAdjacents() {
-        for (int y = 0; y < H; y++) {
-            for (int x = 0; x < L; x++) {
-                if (x > 0) {
-                    cells[x][y].addAdjacent(cells[x - 1][y]);
-                }
-                if (y > 0) {
-                    cells[x][y].addAdjacent(cells[x][y - 1]);
-                }
-            }
-        }
-    }
 
     private void floodFill() {
         List<Integer> sizes = new ArrayList<Integer>();
-        for (int y = 0; y < H; y++) {
-            for (int x = 0; x < L; x++) {
-                Cell c = cells[x][y];
+        for (int y = 0; y < g.H; y++) {
+            for (int x = 0; x < g.L; x++) {
+                Cell c = g.get(x,y);
                 if (!c.isVisited && !c.isWall) {
                     Queue<Cell> queue = new LinkedList<Cell>();
                     queue.add(c);
@@ -81,10 +58,10 @@ public class Day9 extends PuzzleSolver {
 
     @Override
     protected void computeFirstStep() {
-        for (int y = 0; y < H; y++) {
-            for (int x = 0; x < L; x++) {
+        for (int y = 0; y < g.H; y++) {
+            for (int x = 0; x < g.L; x++) {
 
-                Cell c = cells[x][y];
+                Cell c = g.get(x,y);
                 //System.err.println("checking "+c.n+" "+c.adjacents.size());
                 boolean isSmaller = true;
                 for (Cell adj : c.adjacents) {

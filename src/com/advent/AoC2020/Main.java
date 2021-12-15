@@ -12,7 +12,7 @@ public class Main {
         Scanner sc = new Scanner(file);
         Day9 d = new Day9();
         d.read2(sc);*/
-        PuzzleSolver solver = PuzzleSolver.get(14);
+        PuzzleSolver solver = PuzzleSolver.get(15);
         solver.solve();
         /*int n = 0;
         //Map<String, Bag> bags = new HashMap<String, Bag>();

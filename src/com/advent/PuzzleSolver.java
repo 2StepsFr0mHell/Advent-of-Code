@@ -59,6 +59,8 @@ public abstract class PuzzleSolver {
                 return new Day10();
             case 14:
                 return new Day14();
+            case 15:
+                return new Day15();
             case 18:
                 return new FormulaSolver("src/inputs/formulas.txt");
         }
